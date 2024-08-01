@@ -1,0 +1,10 @@
+services:
+  admin-toolkit:
+    image: registry.sikapp.ir/golang:1.22-bullseye
+    command: tail -f /dev/null # sleep infinity #
+    restart: unless-stopped
+    volumes:
+      - ./.data/go:/go
+      - ./.data/home:/root
+      - ./:/src
+      - /home/ali/silicon:/mnt/inputs:ro
