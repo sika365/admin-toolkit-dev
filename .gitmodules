@@ -1,0 +1,3 @@
+[submodule "src"]
+	path = src
+	url = https://github.com/sika365/admin-toolkit.git
