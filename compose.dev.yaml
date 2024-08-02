@@ -3,8 +3,10 @@ services:
     image: registry.sikapp.ir/golang:1.22-bullseye
     command: tail -f /dev/null # sleep infinity #
     restart: unless-stopped
+    ports:
+      - 18080:8080
     volumes:
       - ./.data/go:/go
       - ./.data/home:/root
-      - ./:/src
-      - /home/ali/silicon:/mnt/inputs:ro
+      - ./src:/src
+      - ${INPUT_DATA}:/mnt/inputs:ro
