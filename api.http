@@ -1,0 +1,86 @@
+#################################################
+### FILE ########################################
+#################################################
+
+### Sync files (not completed)
+POST http://localhost:8080/api/v1/files
+content-type: application/json
+
+{
+  "root": "./import/images",
+  "max_depth": 1,
+  "content_types": "image/.+"
+}
+
+#################################################
+### IMAGE #######################################
+#################################################
+
+### Sync images
+POST http://localhost:8080/api/v1/images/sync
+content-type: application/json
+
+{
+  "root": "./import/images",
+  "max_depth": 10,
+  "content_types": "image/.+",
+  "replace": true
+}
+
+#################################################
+### CATEGORY ####################################
+#################################################
+
+### Sync categories by slug 
+POST http://localhost:8080/api/v1/categories/sync
+content-type: application/json
+
+{
+  "root": "./import/csv/enabled",
+  "max_depth": 1,
+  "content_types": ".+",
+  "category_header_map": {
+    "title": "گروه کالا"
+  }
+}
+
+#################################################
+### PRODUCT #####################################
+#################################################
+
+### Sync by barcoded image
+POST http://localhost:8080/api/v1/products/sync/images?order_by=newest&check_availability=false&search_products_in_nodes=true&search_in_node=false&search_in_sub_node=false&get_product_parents=false&search_in_reserved_quantity=false&search_in_limited_quantity=false&limit=20&offset=0&cover_status=0&view=node&remote_pagination=false&remote_search=false&includes=Cover&includes=Nodes.Parent.Category&includes=Tags.Node.Category&includes=CategoryNodes&store_id=28&branch_id=32&stock_id=29
+content-type: application/json
+
+{
+  // file scan request
+  "root": "",
+  "max_depth": 1,
+  "content_types": "image/.+",
+  "naming_pattern": "",
+  // product sync request
+  "replace_cover": true,
+  "replace_gallery": false,
+  "ignore_cover_if_empty": false,
+  "ignore_add_to_gallery": true,
+  // product scan request
+  "cover_naming": "",
+  "gallery_naming": "",
+  "ignore_match": false
+}
+
+### Sync by spread sheets
+POST http://localhost:8080/api/v1/products/sync/spreadsheets?order_by=newest&check_availability=false&search_products_in_nodes=true&search_in_node=false&search_in_sub_node=false&get_product_parents=false&search_in_reserved_quantity=false&search_in_limited_quantity=false&limit=20&offset=0&cover_status=0&view=node&remote_pagination=false&remote_search=false&includes=Cover&includes=Nodes.Parent.Category&includes=Tags.Node.Category&includes=CategoryNodes&store_id=28&branch_id=32&stock_id=29
+content-type: application/json
+
+{
+  "root": "./import/csv/enabled",
+  "max_depth": 1,
+  "content_types": ".+",
+  "replace_nodes": true,
+  "product_header_map": {
+    "title": "نام",
+    "barcode": "بارکد",
+    "category": "گروه کالا"
+  }
+}

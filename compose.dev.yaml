@@ -9,4 +9,4 @@ services:
       - ./.data/go:/go
       - ./.data/home:/root
       - ./src:/src
-      - ${INPUT_DATA}:/mnt/inputs:ro
+      - ${INPUT_DATA}:/mnt/inputs
