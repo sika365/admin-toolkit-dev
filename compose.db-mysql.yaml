@@ -1,0 +1,27 @@
+services:
+  mysql:
+    image: registry.sikapp.ir/shevi/mysql:8
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: LhfzHrXFmF
+      MYSQL_DATABASE: sika
+      MYSQL_USER: sika
+      MYSQL_PASSWORD: S!k@
+    volumes:
+      - ./vols/db-mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    image: registry.sikapp.ir/phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8036:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: LhfzHrXFmF
+      UPLOAD_LIMIT: 102400K
+    depends_on:
+      - mysql
